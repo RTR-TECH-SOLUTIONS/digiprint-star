@@ -1,0 +1,152 @@
+/*
+ * Identitatea Digiprint (logo-ul nou, bleumarin + roșu) și secțiunile cerute de client: Print, Parteneri.
+ * Se încarcă după site.css, care e generat din demo. Selectorii păstrează forma :is(.c-x,.c-x *) ca să aibă
+ * aceeași specificitate cu regulile pe care le înlocuiesc.
+ */
+
+/* Culoarea închisă a site-ului = bleumarinul din logo. */
+:root {
+  --color-ink: #051b32;
+}
+
+/* Antet */
+.logo:is(.c-header, .c-header *) img:is(.c-header, .c-header *) {
+  width: 204px;
+}
+.meniu:is(.c-header, .c-header *) a:is(.c-header, .c-header *) {
+  color: rgb(5 27 50 / 0.8);
+}
+@media (width <= 1279px) {
+  .meniu:is(.c-header, .c-header *) {
+    gap: 18px;
+  }
+  .logo:is(.c-header, .c-header *) img:is(.c-header, .c-header *) {
+    width: 176px;
+  }
+}
+@media (width <= 1099px) {
+  .logo:is(.c-header, .c-header *) img:is(.c-header, .c-header *) {
+    width: 168px;
+  }
+}
+@media (width <= 400px) {
+  .logo:is(.c-header, .c-header *) img:is(.c-header, .c-header *) {
+    width: 148px;
+  }
+}
+
+/* Subsol */
+.marca:is(.c-footer, .c-footer *) img:is(.c-footer, .c-footer *) {
+  width: 216px;
+}
+
+/* Hero: poza pe toată lățimea, textul în stânga pe un voal bleumarin. */
+@media (width >= 861px) {
+  .hero-foto:is(.c-hero, .c-hero *) {
+    inset: 0;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .hero-foto:is(.c-hero, .c-hero *)::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgb(5 27 50 / 0.95) 0%,
+      rgb(5 27 50 / 0.9) 32%,
+      rgb(5 27 50 / 0.62) 50%,
+      rgb(5 27 50 / 0) 70%
+    );
+  }
+  .hero-foto:is(.c-hero, .c-hero *) img:is(.c-hero, .c-hero *) {
+    object-position: 100% 22%;
+  }
+}
+@media (width <= 860px) {
+  .hero-foto:is(.c-hero, .c-hero *) img:is(.c-hero, .c-hero *) {
+    object-position: 62% 24%;
+  }
+}
+
+/* Servicii: cinci carduri, două mari sus și trei dedesubt. */
+@media (width >= 1001px) {
+  .servicii:is(.c-home, .c-home *):has(> :nth-child(5):last-child) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .servicii:is(.c-home, .c-home *):has(> :nth-child(5):last-child) > * {
+    grid-column: span 2;
+  }
+  .servicii:is(.c-home, .c-home *):has(> :nth-child(5):last-child) > :nth-child(-n + 2) {
+    grid-column: span 3;
+  }
+  .servicii:is(.c-home, .c-home *):has(> :nth-child(5):last-child) > :nth-child(-n + 2) .poza:is(.c-home, .c-home *) {
+    aspect-ratio: 3 / 2;
+  }
+}
+@media (481px <= width <= 1000px) {
+  .servicii:is(.c-home, .c-home *):has(> :nth-child(5):last-child) > :first-child {
+    grid-column: 1 / -1;
+  }
+  .servicii:is(.c-home, .c-home *):has(> :nth-child(5):last-child) > :first-child .poza:is(.c-home, .c-home *) {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Parteneri: logo-urile urcate din panou; fără logo apare numele firmei. */
+.parteneri .logouri {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+.parteneri .logouri li {
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+  padding: 16px 18px;
+  border: 1px solid var(--color-linie);
+  border-radius: var(--radius-ui);
+  background: #fff;
+  text-align: center;
+}
+.parteneri .logouri span {
+  color: var(--color-ink);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.parteneri .logouri img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 56px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.75;
+  transition:
+    filter 0.2s ease-out,
+    opacity 0.2s ease-out;
+}
+.parteneri .logouri li:hover img {
+  filter: none;
+  opacity: 1;
+}
+@media (width <= 1000px) {
+  .parteneri .logouri {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (width <= 640px) {
+  .parteneri .logouri {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .parteneri .logouri li {
+    min-height: 80px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .parteneri .logouri img {
+    transition: none;
+  }
+}
