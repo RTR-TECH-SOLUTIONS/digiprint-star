@@ -40,6 +40,11 @@
   width: 216px;
 }
 
+/* Contact: „Punct de lucru” și „Sediu social” încap pe un rând în coloana de etichete. */
+dl:is(.c-contact, .c-contact *) > div:is(.c-contact, .c-contact *) {
+  grid-template-columns: 112px minmax(0, 1fr);
+}
+
 /* Hero: poza pe toată lățimea, textul în stânga pe un voal bleumarin. */
 @media (width >= 861px) {
   .hero-foto:is(.c-hero, .c-hero *) {

@@ -105,7 +105,8 @@
       if (nume.value.trim().length < 2) lipsa.push([nume, 'numele']);
       if (telefon.value.replace(/\D/g, '').length < 9) lipsa.push([telefon, 'un telefon valid']);
       if (!serviciu.value) lipsa.push([serviciu, 'serviciul']);
-      [nume, telefon, serviciu].forEach((c) => c.removeAttribute('aria-invalid'));
+      if (serviciu.value === 'altele' && !detalii.value.trim()) lipsa.push([detalii, 'ce ai nevoie']);
+      [nume, telefon, serviciu, detalii].forEach((c) => c.removeAttribute('aria-invalid'));
       if (lipsa.length) {
         lipsa.forEach(([c]) => c.setAttribute('aria-invalid', 'true'));
         eroare.textContent = `Completează ${lipsa.map(([, t]) => t).join(', ')}.`;
